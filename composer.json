@@ -1,0 +1,14 @@
+{
+  "name": "acquia/acquia-lift-samples",
+  "description": "Code samples and integration examples for Acquia Lift. This is for reference only and should not be used in any production site",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Acquia Engineering",
+      "homepage": "https://www.acquia.com",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {}
+}
