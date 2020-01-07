@@ -1,0 +1,2 @@
+# Acquia Lift Tools
+This modules provides some utiity functions and other tools that are used in the [Demo Framework](https://github.com/acquia/df "Demo Framework") for helping manage Lift demo setup. These may be helpful references for other projects.
