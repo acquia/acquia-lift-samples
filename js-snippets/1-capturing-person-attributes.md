@@ -15,6 +15,7 @@ When using an attribute containing a date, the date must display in the followin
 
 For example:
 `2015-03-25T00:00:00.000Z`
+
 ###Example usage
 The following example sets user-defined fields 5, 6, and 7 to firmographic values associated with the business the person works for—the company SMB, categorized as Retail, with 0-50 employees:
 
@@ -23,6 +24,7 @@ The following example sets user-defined fields 5, 6, and 7 to firmographic value
     {'person_udf5':'SMB', 'person_udf6':'Retail', 'person_udf7': '0-50 employees' }
     ] );
     </script>
+
 ##Note
 
 Public _tcaq functions are only available after lift-capture.js is loaded on a page after personalization return. You will know lift-capture.js hasnt loaded on a page if you receive the following reference error:
