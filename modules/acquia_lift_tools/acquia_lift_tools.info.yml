@@ -1,0 +1,7 @@
+name: Acquia Lift Tools
+type: module
+description: 'Utility functions to manage Lift demo setup.'
+package: Acquia Lift
+core: 8.x
+dependencies:
+ - acquia_lift

@@ -1,0 +1,9 @@
+{
+  "name": "drupal/acquia_lift_tools",
+  "type": "drupal-module",
+  "description": "Utility functions to manage Lift demo setup.",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "acquia/http-hmac-php": "dev-master"
+  }
+}
