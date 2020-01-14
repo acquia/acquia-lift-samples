@@ -1,0 +1,7 @@
+name: Acquia Lift Block
+type: module
+description: 'Example code to set visibility conditions for Drupal blocks using Lift segments.'
+package: Acquia Lift
+core: 8.x
+dependencies:
+ - acquia_lift

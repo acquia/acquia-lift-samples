@@ -1,0 +1,9 @@
+{
+  "name": "drupal/acquia_lift_block",
+  "type": "drupal-module",
+  "description": "Build Drupal blocks using Lift segments as block visibility conditions.",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "acquia/lift-sdk-php": "dev-master"
+  }
+}

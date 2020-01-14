@@ -1,0 +1,19 @@
+services:
+  acquia_lift_block.route_subscriber:
+    class: 'Drupal\acquia_lift_block\Routing\LiftBlockRouteSubscriber'
+    tags:
+      - { name: event_subscriber }
+
+  acquia_lift_block.event_subscriber:
+    class: Drupal\acquia_lift_block\EventSubscriber\LiftCaptureEventSubscriber
+    arguments: ['@acquia_lift_block.client_manager']
+    tags:
+      - {name: event_subscriber}
+
+  acquia_lift_block.client_manager:
+    class: Drupal\acquia_lift_block\LiftClientConnectionManager
+    arguments: ['@config.factory']
+
+  cache_context.acquia_lift_block:
+    class: Drupal\acquia_lift_block\Cache\AcquiaLiftBlockContext
+    arguments: ['@request_stack']

@@ -1,0 +1,33 @@
+acquia_lift.settings:
+  type: config_object
+  label: 'Acquia Lift settings'
+  mapping:
+    credential:
+      type: config_object
+      label: 'Credential'
+      mapping:
+        api_key:
+          type: string
+          label: 'API Key'
+        secret_key:
+          type: string
+          label: 'Secret Key'
+
+block.block.*.third_party.acquia_lift_block:
+  type: mapping
+  label: Lift Segments settings
+  mapping:
+    segments:
+      allowed_values:
+        type: sequence
+        label: 'Allowed values list'
+        sequence:
+          type: mapping
+          label: 'Allowed value with label'
+          mapping:
+            value:
+              type: string
+              label: 'Value'
+            label:
+              type: label
+              label: 'Segments for the block'
