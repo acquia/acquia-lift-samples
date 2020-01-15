@@ -17,3 +17,5 @@ services:
   cache_context.acquia_lift_block:
     class: Drupal\acquia_lift_block\Cache\AcquiaLiftBlockContext
     arguments: ['@request_stack']
+    tags:
+      - {name: cache.context}
