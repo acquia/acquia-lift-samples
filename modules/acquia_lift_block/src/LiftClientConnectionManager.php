@@ -48,8 +48,10 @@ class LiftClientConnectionManager {
   }
 
   public function getSession() {
-    $cookie = $_COOKIE["touch_id"];
-    if (!$cookie) {
+    if (isset($_COOKIE["touch_id"])) {
+      $cookie = $_COOKIE["touch_id"];
+    }
+    else {
       $permittedChars = '0123456789abcdefghijklmnopqrstuvwxyz';
       $randomTracking = substr(str_shuffle($permittedChars), 0, 16);
       setcookie("touch_id", $randomTracking, time() + 1800);
@@ -84,6 +86,9 @@ class LiftClientConnectionManager {
     $segments = $response->getMatchedSegments();
     foreach ($segments as $segment) {
       $this->currentSegments[] = $segment->getId();
+    }
+    if (!empty($segment)) {
+      return $segment;
     }
   }
 
