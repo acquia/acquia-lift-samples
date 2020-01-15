@@ -29,8 +29,10 @@ class LiftCaptureEventSubscriber implements EventSubscriberInterface {
   public function onRequest(GetResponseEvent $event) {
     $current_uri = $event->getRequest()->getUri();
     $segments = $this->connection->setCurrentSegments($current_uri);
-    foreach ($segments as $segment) {
-      $event->getRequest()->getSession()->set($segment, $segment);
+    if (!empty($segment)) {
+      foreach ($segments as $segment) {
+        $event->getRequest()->getSession()->set($segment, $segment);
+      }
     }
   }
 
