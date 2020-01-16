@@ -103,7 +103,9 @@ class LiftSegment extends ConditionPluginBase implements ContainerFactoryPluginI
    * {@inheritdoc}
    */
   public function getCacheTags() {
-    return Cache::mergeTags(parent::getCacheTags(), $this->clientManager->getCurrentSegments() ?? []);
+    $tags = $this->configuration['segments'];
+    $tags[] = 'liftblock';
+    return Cache::mergeTags(parent::getCacheTags(), $tags);
   }
 
   /**

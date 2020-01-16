@@ -5,6 +5,7 @@
  * Contains acquia_lift_block.module.
  */
 
+use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -19,4 +20,11 @@ function acquia_lift_block_help($route_name, RouteMatchInterface $route_match) {
 
       return $output;
   }
+}
+
+/**
+ * Implements block_view_alter().
+ */
+function acquia_lift_block_block_view_alter(array &$build, BlockPluginInterface $block) {
+  $build['#cache']['tags'] = ['liftblock'];
 }
