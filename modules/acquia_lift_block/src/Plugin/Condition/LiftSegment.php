@@ -79,6 +79,10 @@ class LiftSegment extends ConditionPluginBase implements ContainerFactoryPluginI
    * {@inheritdoc}
    */
   public function evaluate() {
+    if (empty($this->configuration['segments']) && !$this->isNegated()) {
+      return TRUE;
+    }
+
     $current_segments = $this->clientManager->getCurrentSegments();
     //drupal_set_message($this->t('<pre>@foo</pre>', ['@foo' => var_export($current_segments, TRUE)]));
     //drupal_set_message($this->t('<pre>@foo</pre>', ['@foo' => var_export($this->configuration['segments'], TRUE)]));
