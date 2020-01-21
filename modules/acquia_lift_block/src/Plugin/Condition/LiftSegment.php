@@ -64,7 +64,7 @@ class LiftSegment extends ConditionPluginBase implements ContainerFactoryPluginI
       '#default_value' => $this->configuration['segments'] ?? [],
       '#multiple' => TRUE,
     ];
-    return $form;
+    return parent::buildConfigurationForm($form, $form_state);
   }
 
   /**
