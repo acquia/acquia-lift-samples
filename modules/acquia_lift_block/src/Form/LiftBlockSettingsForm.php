@@ -35,7 +35,7 @@ Class LiftBlockSettingsForm extends AdminSettingsForm {
     ];
 
     $form['lift_block']['secret_key'] = [
-      '#type' => 'password',
+      '#type' => 'textfield',
       '#title' => $this->t('Secret Key'),
       '#description' => $this->t('Your Lift subscription\'s Secret Key.'),
       '#default_value' => $config->get('credential.secret_key'),
