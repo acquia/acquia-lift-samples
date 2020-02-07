@@ -1,0 +1,10 @@
+lift_block:
+  version: VERSION
+  css:
+    theme:
+      css/lift-block.css: {}
+  js:
+    js/lift-block.js: { preprocess: false }
+  dependencies:
+    - core/drupal
+    - core/jquery
