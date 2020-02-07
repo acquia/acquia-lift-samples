@@ -93,7 +93,8 @@ class LiftSegment extends ConditionPluginBase implements ContainerFactoryPluginI
         return TRUE;
       }
     }
-    return FALSE;
+    // Changed to true since will will use css to hide js to show.
+    return TRUE;
   }
 
   /**
@@ -108,7 +109,6 @@ class LiftSegment extends ConditionPluginBase implements ContainerFactoryPluginI
    */
   public function getCacheTags() {
     $tags = $this->configuration['segments'];
-    $tags[] = 'liftblock';
     return Cache::mergeTags(parent::getCacheTags(), $tags);
   }
 
