@@ -22,9 +22,23 @@ function acquia_lift_block_help($route_name, RouteMatchInterface $route_match) {
   }
 }
 
+
 /**
- * Implements block_view_alter().
+ * Implements hook_preprocess_block().
  */
-function acquia_lift_block_block_view_alter(array &$build, BlockPluginInterface $block) {
-  $build['#cache']['tags'] = ['liftblock'];
+function acquia_lift_block_preprocess_block(&$variables) {
+  $id = $variables['elements']['#id'];
+  $block = \Drupal\block\Entity\Block::load($id);
+
+  if (method_exists($block, 'getVisibility')) {
+    $visibility = $block->getVisibility();
+    if (isset($visibility['acquia_lift_block_segment'])) {
+      $variables['attributes']['class'][] = 'liftblock';
+      $variables['#attached']['library'][] = 'acquia_lift_block/lift_block';
+      $segments = $visibility['acquia_lift_block_segment']['segments'];
+      foreach ($segments as $segment) {
+        $variables['attributes']['class'][] = 'liftblock-' . $segment;
+      }
+    }
+  }
 }
