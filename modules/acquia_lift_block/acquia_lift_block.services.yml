@@ -10,12 +10,6 @@ services:
     tags:
       - { name: event_subscriber }
 
-  acquia_lift_block.cache_invalidator:
-    class: Drupal\acquia_lift_block\EventSubscriber\LiftBlockCacheInvalidator
-    arguments: ['@cache_tags.invalidator']
-    tags:
-      - { name: event_subscriber }
-
   acquia_lift_block.client_manager:
     class: Drupal\acquia_lift_block\LiftClientConnectionManager
     arguments: ['@config.factory']
