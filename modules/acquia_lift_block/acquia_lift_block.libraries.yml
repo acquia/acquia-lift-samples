@@ -7,4 +7,3 @@ lift_block:
     js/lift-block.js: { preprocess: false }
   dependencies:
     - core/drupal
-    - core/jquery

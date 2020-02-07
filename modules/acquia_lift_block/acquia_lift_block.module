@@ -27,6 +27,7 @@ function acquia_lift_block_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_preprocess_block().
  */
 function acquia_lift_block_preprocess_block(&$variables) {
+  // @TODO: find a better way to do this instead of loading each block
   $id = $variables['elements']['#id'];
   $block = \Drupal\block\Entity\Block::load($id);
 
