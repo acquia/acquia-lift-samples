@@ -75,6 +75,13 @@ class LiftSegment extends ConditionPluginBase implements ContainerFactoryPluginI
     parent::submitConfigurationForm($form, $form_state);
   }
 
+   /**
+   * {@inheritdoc}
+   */
+  public function isNegated() {
+    //return !empty($this->configuration['negate']);
+  }
+
   /**
    * {@inheritdoc}
    */
