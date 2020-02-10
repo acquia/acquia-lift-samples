@@ -37,8 +37,14 @@ function acquia_lift_block_preprocess_block(&$variables) {
       $variables['attributes']['class'][] = 'liftblock';
       $variables['#attached']['library'][] = 'acquia_lift_block/lift_block';
       $segments = $visibility['acquia_lift_block_segment']['segments'];
-      foreach ($segments as $segment) {
-        $variables['attributes']['class'][] = 'liftblock-' . $segment;
+      if ($visibility['acquia_lift_block_segment']['negate']) {
+        foreach ($segments as $segment) {
+          $variables['attributes']['class'][] = 'liftblock-' . $segment . '-negate';
+        }
+      } else {
+        foreach ($segments as $segment) {
+          $variables['attributes']['class'][] = 'liftblock-' . $segment;
+        }
       }
     }
   }
