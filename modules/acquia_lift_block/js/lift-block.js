@@ -5,7 +5,7 @@
 
   "use strict";
 
- 
+
 
   /**
    * Changes the visibility of a lift block based on segments.
@@ -17,13 +17,23 @@
       window.addEventListener('acquiaLiftStageCollection', function (e) {
         let liftSegmentsExist = typeof AcquiaLift.currentSegments === 'object';
         if (liftSegmentsExist) {
-          // Loop through each current segment and look for blocks to show
+          // Loop through each current segment
           Object.values(AcquiaLift.currentSegments).forEach(value => {
-            let liftclass = 'liftblock-' + value.id;
-            let blocks = document.getElementsByClassName(liftclass);
+
+            // Look for blocks to show
+            let liftClass = 'liftblock-' + value.id;
+            let liftClassBlocks = document.getElementsByClassName(liftClass);
             // Find every block that is marked for this segment, and show it
-            Object.keys(blocks).forEach(key => {
-              blocks[key].style.display = "inherit";
+            Object.keys(liftClassBlocks).forEach(key => {
+              liftClassBlocks[key].style.display = "inherit";
+            });
+
+            // Look for blocks to hide
+            let liftClassNegate = 'liftblock-' + value.id + '-not';
+            let liftClassNegateBlocks = document.getElementsByClassName(liftClassNegate);
+            // Find every block that is marked for this segment, and hide it
+            Object.keys(liftClassNegateBlocks).forEach(key => {
+              liftClassNegateBlocks[key].style.display = "none";
             });
           });
         }
