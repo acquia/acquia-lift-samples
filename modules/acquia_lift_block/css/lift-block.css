@@ -1,4 +1,4 @@
-.liftblock {
+.liftblock, .liftblock-not {
   display: none;
   transition: all 1s;
 }

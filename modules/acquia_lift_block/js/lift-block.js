@@ -17,24 +17,21 @@
       window.addEventListener('acquiaLiftStageCollection', function (e) {
         let liftSegmentsExist = typeof AcquiaLift.currentSegments === 'object';
         if (liftSegmentsExist) {
-          // Loop through each current segment
-          Object.values(AcquiaLift.currentSegments).forEach(value => {
-
-            // Look for blocks to show
-            let liftClass = 'liftblock-' + value.id;
-            let liftClassBlocks = document.getElementsByClassName(liftClass);
-            // Find every block that is marked for this segment, and show it
-            Object.keys(liftClassBlocks).forEach(key => {
-              liftClassBlocks[key].style.display = "inherit";
-            });
-
-            // Look for blocks to hide
-            let liftClassNegate = 'liftblock-' + value.id + '-not';
-            let liftClassNegateBlocks = document.getElementsByClassName(liftClassNegate);
-            // Find every block that is marked for this segment, and hide it
-            Object.keys(liftClassNegateBlocks).forEach(key => {
-              liftClassNegateBlocks[key].style.display = "none";
-            });
+          // Set our intitial lists
+          let liftSegments = AcquiaLift.currentSegments;
+          let liftBlocks = document.getElementsByClassName('liftblock');
+          let liftBlocksNot = document.getElementsByClassName('liftblock-not');
+          // Look for blocks to show
+          Object.keys(liftBlocks).forEach(key => {
+            if (classContainsSegment(liftBlocks[key], liftSegments)) {
+              liftBlocks[key].style.display = "inherit";
+            }
+          });
+          // Look for negated blocks to show
+          Object.keys(liftBlocksNot).forEach(key => {
+            if (!classContainsSegment(liftBlocksNot[key], liftSegments)) {
+              liftBlocksNot[key].style.display = "inherit";
+            }
           });
         }
       }); // End eventListener
@@ -43,3 +40,17 @@
   };
 
 }(Drupal));
+
+/**
+ * Examine an element to see if it contains any of the segments in the list.
+ * 
+ * @param {element} item 
+ * @param {object} segments 
+ */
+function classContainsSegment(item, segments) {
+  let contains = false;
+  Object.values(segments).forEach(value => {
+    contains = (contains) ? contains : item.classList.contains('liftblock-segment-' + value.id);
+  });
+  return contains;
+}
