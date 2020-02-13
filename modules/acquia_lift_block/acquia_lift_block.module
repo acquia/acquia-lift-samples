@@ -33,14 +33,16 @@ function acquia_lift_block_preprocess_block(&$variables) {
 
   if (method_exists($block, 'getVisibility')) {
     $visibility = $block->getVisibility();
-    if (isset($visibility['acquia_lift_block_segment'])) {
+    $liftblock = isset($visibility['acquia_lift_block_segment']) ? $visibility['acquia_lift_block_segment'] : FALSE;
+    // Only add the classes if the lift visibilty has segments
+    if ($liftblock && !empty($liftblock['segments'])) {
       // Attach the lift block library
       $variables['#attached']['library'][] = 'acquia_lift_block/lift_block';
       // Determine the base class
-      $class = ($visibility['acquia_lift_block_segment']['negate']) ? 'liftblock-not' : 'liftblock';
+      $class = ($liftblock['negate']) ? 'liftblock-not' : 'liftblock';
       $variables['attributes']['class'][] = $class;
       // Add the proper classes for the segments
-      foreach ($visibility['acquia_lift_block_segment']['segments'] as $segment) {
+      foreach ($liftblock['segments'] as $segment) {
           $variables['attributes']['class'][] = 'liftblock-segment-' . $segment;
         }
     }
