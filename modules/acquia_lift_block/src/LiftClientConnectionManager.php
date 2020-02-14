@@ -5,6 +5,7 @@ use Acquia\LiftClient\Entity\Capture;
 use Acquia\LiftClient\Entity\CapturePayload;
 use Acquia\LiftClient\Lift;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use GuzzleHttp\Exception\GuzzleException;
 
 class LiftClientConnectionManager {
 
@@ -79,17 +80,24 @@ class LiftClientConnectionManager {
       $capture->setUserAgent($userAgent);
     }
     $capturePayload->setCaptures([$capture]);
-    $manager = $this->client->getCaptureManager();
-    $response = $manager->add($capturePayload);
 
-    // Get the matched segments.
-    $segments = $response->getMatchedSegments();
-    foreach ($segments as $segment) {
-      $this->currentSegments[] = $segment->getId();
+    try {
+      $manager = $this->client->getCaptureManager();
+      $response = $manager->add($capturePayload);
+
+      // Get the matched segments.
+      $segments = $response->getMatchedSegments();
+      foreach ($segments as $segment) {
+        $this->currentSegments[] = $segment->getId();
+      }
+      if (!empty($segment)) {
+        return $segment;
+      }
     }
-    if (!empty($segment)) {
-      return $segment;
+    catch (GuzzleException $e) {
+      return;
     }
+
   }
 
   public function getCurrentSegments() {
