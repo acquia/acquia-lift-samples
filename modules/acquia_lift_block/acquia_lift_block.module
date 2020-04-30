@@ -48,3 +48,13 @@ function acquia_lift_block_preprocess_block(&$variables) {
     }
   }
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function acquia_lift_block_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id = 'block_form') {
+    // Move Lift Segment tab to the bottom.
+    $form['visibility']['acquia_lift_block_segment']['#weight'] = 9;
+  }
+}
