@@ -5,6 +5,7 @@ use Acquia\LiftClient\Entity\Capture;
 use Acquia\LiftClient\Entity\CapturePayload;
 use Acquia\LiftClient\Lift;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 
 class LiftClientConnectionManager {
@@ -105,13 +106,19 @@ class LiftClientConnectionManager {
   }
 
   public function setAccountSegments() {
-    // Get all existing segments.
-    $manager = $this->client->getSegmentManager();
-    $segments = $manager->query();
 
-    // List all segment descriptions.
-    foreach ($segments as $segment) {
-      $this->accountSegments[$segment->getId()] = $segment->getId();
+    try {
+      // Get all existing segments.
+      $manager = $this->client->getSegmentManager();
+      $segments = $manager->query();
+
+      // List all segment descriptions.
+      foreach ($segments as $segment) {
+        $this->accountSegments[$segment->getId()] = $segment->getId();
+      }
+    }
+    catch (ClientException $e){
+      return;
     }
 
   }
