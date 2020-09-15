@@ -11,8 +11,7 @@
   Drupal.behaviors.liftBlocks = {
     attach: function (context) {
 
-      // Wait until Lift has finished finding out whats going on
-      window.addEventListener('acquiaLiftStageCollection', function (e) {
+      window.addEventListener('load', function (e) {
         let liftSegmentExist = typeof AcquiaLift.currentSegments === 'object';
         // Set our intitial lists
         let liftSegments = (liftSegmentExist) ? AcquiaLift.currentSegments : {};
@@ -39,9 +38,9 @@
 
 /**
  * Examine an element to see if it contains any of the segments in the list.
- * 
- * @param {element} item 
- * @param {object} segments 
+ *
+ * @param {element} item
+ * @param {object} segments
  */
 function classContainsSegment(item, segments) {
   let contains = false;
