@@ -11,31 +11,36 @@
   Drupal.behaviors.liftBlocks = {
     attach: function (context) {
 
-      window.addEventListener('load', function (e) {
-        let liftSegmentExist = typeof AcquiaLift.currentSegments === 'object';
-        // Set our intitial lists
-        let liftSegments = (liftSegmentExist) ? AcquiaLift.currentSegments : {};
-        let liftBlocks = document.getElementsByClassName('liftblock');
-        let liftBlocksNot = document.getElementsByClassName('liftblock-not');
-        // Look for blocks to show
-        Object.keys(liftBlocks).forEach(key => {
-          if (classContainsSegment(liftBlocks[key], liftSegments)) {
-            liftBlocks[key].style.display = "inherit";
-          }
-        });
-        // Look for negated blocks to show
-        Object.keys(liftBlocksNot).forEach(key => {
-          if (!classContainsSegment(liftBlocksNot[key], liftSegments)) {
-            liftBlocksNot[key].style.display = "inherit";
-          }
-        });
-      }); // End eventListener
-
+     window.addEventListener('acquiaLiftStageCollection', function(e) {
+       showLiftBlock();
+     });
     }
   };
 
 }(Drupal));
 
+/**
+ * Get Lift segments and set visibility.
+ */
+function showLiftBlock() {
+  let liftSegmentExist = typeof AcquiaLift.currentSegments === 'object';
+  // Set our intitial lists
+  let liftSegments = (liftSegmentExist) ? AcquiaLift.currentSegments : {};
+  let liftBlocks = document.getElementsByClassName('liftblock');
+  let liftBlocksNot = document.getElementsByClassName('liftblock-not');
+  // Look for blocks to show
+  Object.keys(liftBlocks).forEach(key => {
+    if (classContainsSegment(liftBlocks[key], liftSegments)) {
+      liftBlocks[key].style.display = "block";
+    }
+  });
+  // Look for negated blocks to show
+  Object.keys(liftBlocksNot).forEach(key => {
+    if (!classContainsSegment(liftBlocksNot[key], liftSegments)) {
+      liftBlocksNot[key].style.display = "block";
+    }
+  });
+}
 /**
  * Examine an element to see if it contains any of the segments in the list.
  *
