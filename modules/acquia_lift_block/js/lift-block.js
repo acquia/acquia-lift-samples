@@ -11,9 +11,16 @@
   Drupal.behaviors.liftBlocks = {
     attach: function (context) {
 
-     window.addEventListener('acquiaLiftStageCollection', function(e) {
-       showLiftBlock();
-     });
+      window.addEventListener('load', function(e) {
+        if (document.getElementsByClassName('liftblock')[0]) {
+          if (AcquiaLift.currentSegments == null) {
+            window.setTimeout(showLiftBlock, 100);
+          } else {
+            showLiftBlock();
+          }
+        }
+      });
+
     }
   };
 
