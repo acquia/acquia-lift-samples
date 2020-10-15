@@ -28,23 +28,24 @@ function acquia_lift_block_help($route_name, RouteMatchInterface $route_match) {
  */
 function acquia_lift_block_preprocess_block(&$variables) {
   // @TODO: find a better way to do this instead of loading each block
-  $id = $variables['elements']['#id'];
-  $block = \Drupal\block\Entity\Block::load($id);
-
-  if (method_exists($block, 'getVisibility')) {
-    $visibility = $block->getVisibility();
-    $liftblock = isset($visibility['acquia_lift_block_segment']) ? $visibility['acquia_lift_block_segment'] : FALSE;
-    // Only add the classes if the lift visibilty has segments
-    if ($liftblock && !empty($liftblock['segments'])) {
-      // Attach the lift block library
-      $variables['#attached']['library'][] = 'acquia_lift_block/lift_block';
-      // Determine the base class
-      $class = ($liftblock['negate']) ? 'liftblock-not' : 'liftblock';
-      $variables['attributes']['class'][] = $class;
-      // Add the proper classes for the segments
-      foreach ($liftblock['segments'] as $segment) {
+  if (isset($variables['elements']['#id'])) {
+    $id = $variables['elements']['#id'];
+    $block = \Drupal\block\Entity\Block::load($id);
+    if (method_exists($block, 'getVisibility')) {
+      $visibility = $block->getVisibility();
+      $liftblock = isset($visibility['acquia_lift_block_segment']) ? $visibility['acquia_lift_block_segment'] : FALSE;
+      // Only add the classes if the lift visibilty has segments
+      if ($liftblock && !empty($liftblock['segments'])) {
+        // Attach the lift block library
+        $variables['#attached']['library'][] = 'acquia_lift_block/lift_block';
+        // Determine the base class
+        $class = ($liftblock['negate']) ? 'liftblock-not' : 'liftblock';
+        $variables['attributes']['class'][] = $class;
+        // Add the proper classes for the segments
+        foreach ($liftblock['segments'] as $segment) {
           $variables['attributes']['class'][] = 'liftblock-segment-' . $segment;
         }
+      }
     }
   }
 }
