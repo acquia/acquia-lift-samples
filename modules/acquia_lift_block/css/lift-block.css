@@ -2,3 +2,8 @@
   display: none;
   transition: all 1s;
 }
+
+/* Show Lift block when using the Site Studio Visual Page Builder */
+.coh-page-builder-enabled .liftblock {
+  display: block;
+}
