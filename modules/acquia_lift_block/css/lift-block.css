@@ -4,6 +4,7 @@
 }
 
 /* Show Lift block when using the Site Studio Visual Page Builder */
-.coh-page-builder-enabled .liftblock {
+.coh-page-builder-enabled .liftblock,
+.coh-page-builder-enabled .liftblock-not {
   display: block;
 }
